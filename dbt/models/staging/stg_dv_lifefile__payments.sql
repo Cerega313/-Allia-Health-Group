@@ -22,6 +22,15 @@ hashed_columns:
   hk_payer_h:
     - payer_id
 
+  # LINKS
+  hk_payment_order_l:
+    - payment_id
+    - order_id
+
+  hk_payment_payer_l:
+    - payment_id
+    - payer_id
+
   # Satellites
   hd_payment_financials_s:
     - copay_amount
