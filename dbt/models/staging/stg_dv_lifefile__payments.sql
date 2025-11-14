@@ -2,7 +2,7 @@
 
 {%- set yaml_metadata -%}
 source_model:
-  lifefile: payments_raw
+  lifefile: stg_lifefile__payments 
 
 ldts: updated_at
 rsrc: "!lifefile/payments"
