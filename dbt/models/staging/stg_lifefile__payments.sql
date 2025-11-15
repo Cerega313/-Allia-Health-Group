@@ -10,6 +10,7 @@ clean as (
         -- keys
         payment_id,
         order_id,
+        provider_id,
 
         -- dates
         SAFE_CAST(created_at   AS timestamp) as created_at,
