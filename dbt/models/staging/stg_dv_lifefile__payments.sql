@@ -11,6 +11,7 @@ business_keys:
   - payment_id
   - order_id
   - payer_id
+  - provider_id
 
 hashed_columns:
   hk_payment_h:
@@ -22,6 +23,9 @@ hashed_columns:
   hk_payer_h:
     - payer_id
 
+  hk_provider_h:
+    - provider_id
+
   # LINKS
   hk_payment_order_l:
     - payment_id
@@ -30,6 +34,10 @@ hashed_columns:
   hk_payment_payer_l:
     - payment_id
     - payer_id
+
+  hk_payment_payer_l:
+    - payment_id
+    - provider_id
 
   # Satellites
   hd_payment_financials_s:
