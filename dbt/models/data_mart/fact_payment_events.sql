@@ -39,7 +39,7 @@ sat_fin_current as (
 sat_evt_current as (
     select
       se.*
-    from {{ ref('sat_payment_event_v0') }} se
+    from {{ ref('sat_payment_financials_v0') }} se
 )
 
 select
@@ -56,7 +56,6 @@ select
   sf.total_amount,
   sf.cost_amount,
   sf.profit_amount,
-  st.is_refund,
 
   se.payer_type,
   se.payment_method,
