@@ -112,6 +112,9 @@ sources:
 
           - name: npi
             description: National Provider Identifier (NPI) where available.
+            tests:
+              - not_null
+              - unique
 
           - name: first_name
             description: Provider first name.
