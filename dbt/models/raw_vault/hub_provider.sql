@@ -4,7 +4,7 @@
 hashkey: 'hk_provider_h'
 business_keys:
   - provider_id
-source_models: 'stg_dv_lifefile__payments'
+source_models: 'stg_lifefile__providers'
 {%- endset -%}
 
 {{ datavault4dbt.hub(yaml_metadata=yaml_metadata) }}
