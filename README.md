@@ -19,7 +19,7 @@ flowchart LR
 
   %% --- Source system ---
   subgraph LifeFile
-    LF_SFTP["LifeFile SFTP<br/>(payments*.csv, providers*.csv)"]
+    LF_SFTP["LifeFile SFTP<br/>(payments*.csv, providers*.csv)<br/>daily 23:30"]
   end
 
   %% --- Orchestration (Cloud Scheduler) ---
@@ -45,20 +45,20 @@ flowchart LR
 
   %% --- Reference tables (program / cycles) ---
   subgraph BQ_Ref["BigQuery: reference"]
-    BQ_PROGRAMS["crm.order_types<br/>(lf_ops_orders.order_type)"]
+    BQ_PROGRAMS["crm.order_types<br/>"]
   end
 
   %% --- Transformations via dbt ---
   subgraph BQ_Transform["BigQuery: dbt layers"]
-    DBT_STG["Staging<br/>(stg_lifefile__*, stg_ops__*)"]
-    DBT_DV["Data Vault<br/>(hubs / links / satellites)"]
-    DBT_MARTS["Marts<br/>(fact_payment_events,<br/>fact_provider_cycles, etc.)"]
+    DBT_STG["Staging<br/>"]
+    DBT_DV["Data Vault<br/>"]
+    DBT_MARTS["Marts<br/>"]
     AI_CHURN["ai_churn.provider_cycle_training"]
   end
 
   %% --- BI / reporting ---
   subgraph BI["Analytics & BI"]
-    LOOKER["Looker dashboards<br/>(provider segmentation,<br/>revenue, cost-to-serve, churn risk)"]
+    LOOKER["Looker dashboards<br/>"]
   end
 
   %% --- Flows ---
