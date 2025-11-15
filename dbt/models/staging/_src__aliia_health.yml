@@ -78,6 +78,11 @@ sources:
             tests:
               - not_null
 
+          - name: provider_id
+            description: Identifier of the provider entity
+            tests:
+              - not_null
+
           - name: payment_method
             description: Payment method used
             tests:
