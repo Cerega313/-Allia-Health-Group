@@ -106,3 +106,6 @@ flowchart LR
 
   %% AI training dataset from marts
   DBT_MARTS --> AI_CHURN
+
+
+
