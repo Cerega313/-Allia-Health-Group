@@ -100,3 +100,47 @@ sources:
 
           - name: gcs_uri
             description: Full GCS URI of the source file for this row, used for lineage and linking to the ingestion_log.
+            
+      - name: providers_raw
+        description: LifeFile provider data as delivered in daily batch files. One row = one provider (prescriber).
+        columns:
+          - name: provider_id
+            description: Unique identifier of the provider in LifeFile.
+            tests:
+              - not_null
+              - unique
+
+          - name: npi
+            description: National Provider Identifier (NPI) where available.
+
+          - name: first_name
+            description: Provider first name.
+
+          - name: last_name
+            description: Provider last name.
+
+          - name: city
+            description: City of the practice.
+
+          - name: state
+            description: State / region code (e.g. 'TX', 'CA').
+
+          - name: phone
+            description: Phone number for the provider
+
+          - name: email
+            description: Email for the provider
+
+          - name: is_active
+            description: Flag indicating whether the provider is currently active in LifeFile.
+
+          - name: created_at
+            description: Timestamp when the provider record was first created in LifeFile.
+
+          - name: updated_at
+            description: Timestamp when the provider record was last updated in LifeFile.
+            tests:
+              - not_null
+              - updated_not_before_created:
+                  created_at_col: created_at
+                  updated_at_col: updated_at
