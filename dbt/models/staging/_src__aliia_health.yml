@@ -73,11 +73,6 @@ sources:
                   values: ['PATIENT', 'INSURANCE', 'OTHER']
                   quote: true
 
-          - name: payer_id
-            description: Identifier of the payer entity
-            tests:
-              - not_null
-
           - name: provider_id
             description: Identifier of the provider entity
             tests:
