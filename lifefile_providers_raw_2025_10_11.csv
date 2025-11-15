@@ -1,0 +1,61 @@
+provider_id,npi,first_name,last_name,city,state,phone,email,is_active,created_at,updated_at
+1,9600133890,Sarah,Smith,San Antonio,CA,+1342-954 2679,sarah.wilson@gmail.com,true,2025-10-23T23:39:41,2025-11-19T07:41:14
+2,5116155940,David,Smith,Austin,IL,632-548-5552,,true,2025-11-18T04:32:41,2025-11-24T07:24:49
+3,4752553419,Olivia,Garcia,Dallas,TX,+1-877-433-5741,olivia.johnson@clinichealth.com,true,2025-11-18T08:54:47,2025-11-18T08:54:47
+4,9537672423,James,Brown,Houston,CA,+1 (232) 523-7572,,true,2025-11-18T09:33:58,2025-11-25T06:48:42
+5,6978480184,Michael,Williams,Dallas,TX,+1312-356 3621,michael.johnson@clinichealth.com,false,2025-11-11T04:03:41,2025-11-11T04:03:41
+6,5288095701,John,Jones,Austin,WA,+1308-840 5889,john.brown@yahoo.com,false,2025-11-29T11:11:46,2025-11-29T11:11:46
+7,4896383465,Olivia,,Los Angeles,TX,978-745-3060,olivia.wilson@yahoo.com,true,2025-10-17T16:26:17,2025-10-17T16:26:17
+8,0518347382,Michael,Johnson,San Antonio,WA,+1425-207 2163,michael.brown@gmail.com,true,2025-11-29T20:47:27,2025-11-30T14:00:40
+9,1065133387,Michael,,Miami,NY,+1633-620 8651,,true,2025-10-06T10:08:29,2025-10-06T10:08:29
+10,6773602606,Sarah,Davis,Dallas,TX,+1-867-753-1241,sarah.brown@yahoo.com,true,2025-10-26T16:33:58,2025-10-26T16:33:58
+11,9788208121,James,,Seattle,CA,+1-259-793-9883,james.smith@gmail.com,true,2025-10-22T08:33:48,2025-10-22T08:33:48
+12,3462475107,Olivia,Brown,Houston,WA,+1 (283) 629-9565,olivia.brown@outlook.com,false,2025-11-19T03:38:24,2025-11-19T03:38:24
+13,8412411824,David,Williams,Dallas,CA,578 491 3584,david.jones@gmail.com,true,2025-10-07T12:29:02,2025-10-07T12:29:02
+14,2427868011,David,Wilson,Houston,TX,+1-849-633-5533,,true,2025-11-23T05:25:36,2025-11-29T02:38:06
+15,8692322602,Robert,,Chicago,TX,+1566-415 5088,,false,2025-11-11T14:59:24,2025-11-19T00:42:14
+16,0365414586,Sarah,Miller,Los Angeles,CA,+1 (404) 671-6728,sarah.brown@yahoo.com,false,2025-11-27T19:31:22,2025-11-27T19:31:22
+17,9816934060,David,Williams,Seattle,TX,+1 (311) 810-8119,david.garcia@clinichealth.com,true,2025-10-26T19:36:15,2025-11-08T08:51:54
+18,8236629946,Anna,Anderson,Dallas,IL,+1507-719 6067,anna.miller@outlook.com,true,2025-10-01T11:03:49,2025-10-01T11:03:49
+19,4895134332,Robert,Anderson,Chicago,FL,16526524501,robert.williams@gmail.com,true,2025-10-08T17:17:57,2025-11-26T19:57:02
+20,3287083172,Olivia,Brown,Miami,FL,+1609-449 3417,olivia.johnson@clinichealth.com,true,2025-11-22T19:20:16,2025-11-28T11:27:04
+21,3471434558,James,Miller,Los Angeles,CA,+1 (961) 686-8373,james.jones@clinichealth.com,true,2025-10-05T08:25:11,2025-10-05T08:25:11
+22,6690967054,Emily,,Miami,NY,+1-755-677-7812,,true,2025-11-28T15:15:21,2025-12-01T11:08:23
+23,7298069901,Olivia,Brown,Seattle,FL,+1 (697) 229-7371,olivia.miller@yahoo.com,false,2025-11-05T16:48:35,2025-11-05T16:48:35
+24,8053100330,Anna,Brown,Chicago,FL,+1 (484) 970-7906,anna.davis@gmail.com,false,2025-11-08T04:35:44,2025-11-08T04:35:44
+25,4966319314,Michael,Davis,Chicago,CA,820-821-2876,michael.johnson@gmail.com,true,2025-11-20T04:24:26,2025-11-29T05:54:09
+26,6284987769,Robert,,Chicago,TX,630 701 2729,robert.davis@yahoo.com,true,2025-10-28T08:56:17,2025-11-02T19:05:36
+27,5494808313,Michael,Davis,Miami,NY,229-706-6325,michael.garcia@outlook.com,true,2025-11-16T20:12:48,2025-11-28T13:32:50
+28,8856855744,Laura,Davis,Dallas,NY,+1 (426) 614-4986,laura.garcia@clinichealth.com,true,2025-10-04T07:00:42,2025-10-04T07:00:42
+29,1343524082,James,,Los Angeles,NY,19418039595,,true,2025-10-02T20:08:49,2025-10-02T20:08:49
+30,7116719022,Emily,,Houston,WA,491 680 8843,emily.smith@outlook.com,true,2025-11-10T03:06:04,2025-11-13T23:25:11
+31,9909133412,Olivia,Anderson,San Antonio,WA,+1 (589) 661-8253,olivia.miller@outlook.com,true,2025-10-18T02:43:58,2025-10-18T02:43:58
+32,7134936183,Robert,Davis,Los Angeles,NY,+1233-437 5720,,false,2025-11-30T09:40:16,2025-11-30T11:50:32
+33,7190659401,David,Anderson,Seattle,FL,+1327-679 5982,david.jones@clinichealth.com,true,2025-10-22T20:56:32,2025-10-24T06:45:17
+34,9671756551,Olivia,Smith,Austin,FL,+1 (731) 867-8245,,true,2025-11-11T14:59:15,2025-11-21T05:34:03
+35,6038597703,James,Smith,Chicago,NY,15313187622,james.smith@clinichealth.com,true,2025-10-05T10:29:12,2025-10-05T10:29:12
+36,7127484677,Laura,,San Antonio,IL,13625181224,laura.brown@gmail.com,true,2025-10-18T05:15:58,2025-10-18T05:15:58
+37,0449972787,Olivia,Wilson,Austin,TX,+1 (482) 991-7798,olivia.wilson@outlook.com,true,2025-10-18T19:47:08,2025-10-18T19:47:08
+38,6270289517,Anna,Brown,San Antonio,WA,+1-592-439-7730,anna.davis@clinichealth.com,true,2025-10-30T16:38:10,2025-10-30T16:38:10
+39,8657809134,Emily,Miller,Austin,TX,16804716546,emily.johnson@outlook.com,false,2025-11-24T03:17:26,2025-11-24T03:17:26
+40,3869222196,Sarah,,Seattle,TX,+1 (247) 532-1919,sarah.miller@yahoo.com,true,2025-11-08T18:07:10,2025-11-13T02:34:23
+41,4367136959,David,7K*u,Dallas,FL,+1553-801 5901,david.jones@clinichealth.com,true,2025-10-23T10:44:56,2025-10-23T10:44:56
+42,3942104709,Robert,,Houston,WA,963-708-5689,robert.garcia@yahoo.com,true,2025-10-05T03:16:53,2025-10-25T18:24:33
+43,5171236851,Emily,,Chicago,WA,+1 (713) 479-3695,emily.davis@outlook.com,true,2025-11-01T09:37:43,2025-11-15T23:02:54
+44,9317461200,David,Anderson,Chicago,TX,+1-891-439-8724,david.wilson@outlook.com,true,2025-10-16T04:13:40,2025-10-16T04:13:40
+45,1796405377,James,Williams,Chicago,IL,960 913 9850,james.williams@clinichealth.com,true,2025-11-28T13:12:17,2025-11-28T13:12:17
+46,9005329318,James,,Seattle,CA,+1325-665 2501,,true,2025-10-07T08:28:59,2025-10-07T08:28:59
+47,0539502402,Emily,,Austin,CA,+1-753-456-3858,emily.smith@yahoo.com,true,2025-11-17T04:08:16,2025-11-24T20:27:32
+48,7661771159,James,,San Antonio,WA,+1 (244) 944-9543,james.smith@gmail.com,true,2025-10-05T10:00:46,2025-11-12T05:58:40
+49,8367365766,Robert,Anderson,Los Angeles,WA,+1819-640 2624,,false,2025-11-11T15:32:16,2025-11-11T15:32:16
+50,1656049451,Emily,,Dallas,TX,642-298-7105,emily.anderson@outlook.com,true,2025-10-07T05:38:00,2025-10-21T09:34:24
+51,2445502296,Anna,Wilson,Seattle,WA,14316391430,anna.jones@gmail.com,true,2025-10-24T23:03:11,2025-10-30T18:22:02
+52,2901476797,Michael,Miller,Chicago,CA,15785196314,michael.smith@yahoo.com,true,2025-10-07T18:39:14,2025-10-07T18:39:14
+53,6226838851,Robert,!^NfCYhaA,Seattle,CA,+1 (985) 340-5186,robert.smith@clinichealth.com,true,2025-10-24T01:32:24,2025-10-24T01:32:24
+54,0529751613,Laura,Johnson,Miami,WA,+1 (614) 926-7843,,true,2025-10-13T19:04:36,2025-10-13T19:04:36
+55,7799799552,David,vj$o^$ySSs,San Antonio,TX,349-462-4232,david.johnson@yahoo.com,false,2025-10-16T16:06:01,2025-11-03T13:37:59
+56,7980793597,James,Johnson,Los Angeles,TX,+1-258-577-5703,james.johnson@clinichealth.com,true,2025-10-31T02:15:09,2025-10-31T02:15:09
+57,5546659051,Anna,Johnson,Austin,TX,453 924 8172,anna.anderson@yahoo.com,true,2025-10-18T14:04:27,2025-10-18T14:04:27
+58,8652816850,Olivia,Williams,Austin,NY,517-871-7421,olivia.johnson@outlook.com,true,2025-10-06T07:47:54,2025-10-06T07:47:54
+59,9270653794,Laura,tjLm#,Houston,IL,15449843147,laura.williams@yahoo.com,false,2025-11-26T16:20:41,2025-11-26T16:20:41
+60,9240758181,Laura,Brown,Los Angeles,FL,19874887256,laura.williams@yahoo.com,true,2025-10-25T05:50:12,2025-10-25T05:50:12
