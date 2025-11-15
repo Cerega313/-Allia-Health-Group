@@ -27,7 +27,6 @@ clean as (
 
         -- payer data
         payer_type,
-        payer_id,
         payment_method,
         status,
   
