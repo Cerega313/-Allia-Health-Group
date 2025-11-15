@@ -123,6 +123,7 @@ flowchart LR
 - If there is no data, the file is downloaded empty.
 
 ### 2.2 Files structure
+The file structure is described in **[dbt/models/staging/_src__aliia_health.yml](https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml)**.
 
 
 
