@@ -20,9 +20,6 @@ hashed_columns:
   hk_order_h:
     - order_id
 
-  hk_payer_h:
-    - payer_id
-
   hk_provider_h:
     - provider_id
 
