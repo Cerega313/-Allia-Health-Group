@@ -1,10 +1,10 @@
 {{ config(materialized = 'incremental') }}
 
 {%- set yaml_metadata -%}
-link_hashkey: 'hk_payment_payer_l' 
+link_hashkey: 'hk_payment_provider_l' 
 foreign_hashkeys:
   - 'hk_payment_h'           
-  - 'hk_payer_h'         
+  - 'hk_provider_h'         
 source_models:
   - name: stg_dv_lifefile__payments
 {%- endset -%}
