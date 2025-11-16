@@ -124,7 +124,7 @@ flowchart LR
 
 ### 2.2 Files structure
 The file structure is described in **[dbt/models/staging/_src__aliia_health.yml](https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml)**.
-
+[Uploading lifefile_providers_raw_2025_10_11.csv…]()
 
 
 ### 2.3 Cloud Function #1 — cf_lifefile_sftp_to_gcs
@@ -185,9 +185,31 @@ CREATE TABLE IF NOT EXISTS raw_technical.ingestion_log (
 );
 ```
 
-## 4. Configuration (env vars & config.py)
-   
-----
+## 4. Trade-off: Postgres vs BigQuery
+
+#### Workload and data profile
+Postgres is a great fit for transactional and mixed workloads, but as you accumulate years of payment and provider history and start running complex analytical queries (year-level scans, multi-table joins), it tends to hit instance resource limits. BigQuery is designed as a columnar analytical warehouse and handles growing volumes and heavy analytics much more comfortably.
+
+#### Infrastructure, operations and DevOps
+Postgres requires instance management (sizing, HA, upgrades, tuning, reporting replicas). BigQuery is a serverless warehouse: scale, resilience and maintenance are handled by GCP, and the data team can focus on models, pipelines and data quality instead of database operations.
+
+#### Cost
+In a production scenario, Postgres costs grow in steps: as data and workload increase, you have to move to larger (and more expensive) instances, often with extra headroom “for the future”. BigQuery’s model is based on storage plus bytes actually scanned: for analytical workloads with peaks (reporting periods, ad-hoc analysis), this gives a more flexible and controllable TCO. With proper partitioning and clustering (e.g. by `payment_date` and `provider_id`), you can keep query costs under control without over-provisioning a large database cluster.
+
+#### Analytics, BI and AI
+BigQuery integrates natively with Looker: marts built in dbt can be exposed directly as BI-ready models for segmenting providers by cycle, revenue, cost-to-serve and profitability. On top of the same tables it’s easy to build the AI dataset (`ai_churn` schema) and feed it into BigQuery ML / Vertex AI / notebooks without extra copies or data movement. With Postgres, both BI and ML always live “outside” and require additional glue code and infrastructure.
+
+#### Why BigQuery is the better choice for this project
+For the provider churn use case in the SFTP → GCS → Cloud Functions → DWH → Looker → `ai_churn` stack, BigQuery provides a more cohesive and scalable solution:
+
+- as data volumes grow, columnar storage and distributed execution in BigQuery allow much faster heavy aggregations and joins; at the current sample size performance is similar, but in production BigQuery delivers a real latency advantage;
+- there is no database cluster to administer, and the system scales with the history of payments, providers and models;
+- it fits naturally with dbt, Looker and the AI layer, enabling a single analytical environment in GCP without extra intermediary systems.
+
+Therefore, for LifeFile + CRM analytics, BI dashboards and the churn training dataset, BigQuery is the natural choice for the main DWH, while Postgres can still be used (if needed) for transactional systems and operational microservices.
+
+
+
 
 ## 5. Downstream modeling (dbt) — overview
 
