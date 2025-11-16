@@ -123,7 +123,8 @@ flowchart LR
 - If there is no data, the file is downloaded empty.
 
 ### 2.2 Files structure
-The file structure is described in **[dbt/models/staging/_src__aliia_health.yml](https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml)**.
+Links **[source descriptions](https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml)**.
+**[cloud functions]([https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml](https://github.com/Cerega313/-Allia-Health-Group/tree/main/%D1%81loud_function))**.
 
 
 ### 2.3 Cloud Function #1 — cf_lifefile_sftp_to_gcs
