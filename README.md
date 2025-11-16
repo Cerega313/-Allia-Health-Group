@@ -348,6 +348,9 @@ flowchart LR
 
 ## 5. Looker Dashboards - sketchily
 
+ **[LookML directory](https://github.com/Cerega313/-Allia-Health-Group/tree/main/LookML)**
+
+
 <img width="3020" height="1634" alt="image" src="https://github.com/user-attachments/assets/b5c70be4-3f57-4ac0-8206-dd2dffef18cf" />
 
 <img width="3168" height="1634" alt="image" src="https://github.com/user-attachments/assets/0a20d8c1-6a96-4ed9-a942-2c5615fdafe7" />
