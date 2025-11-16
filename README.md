@@ -346,7 +346,181 @@ flowchart LR
   DIM_PROGRAM --> AI_CHURN
 ```
 
-## 5. Looker Dashboards - sketchily
+## 6. ai_churn.provider_cycle_train
+
+### DDL
+
+```sql
+
+-- ai_churn schema and training table
+CREATE SCHEMA IF NOT EXISTS ai_churn ;
+
+CREATE TABLE IF NOT EXISTS ai_churn.provider_cycle_train (
+  --------------------------------------------------------
+  -- 1. Key
+  --------------------------------------------------------
+  provider_id                 STRING    NOT NULL, -- provider / prescriber ID (from LifeFile/CRM)
+  npi                         STRING    NOT NULL, -- National Provider Identifier (where available)
+
+  --------------------------------------------------------
+  -- 3. Geo
+  --------------------------------------------------------
+  state                       STRING,            
+  city                        STRING,
+
+  --------------------------------------------------------
+  -- 4. Onboarding
+  --------------------------------------------------------
+
+  provider_onboard_date       DATE,              -- first time provider started any program with Allia
+  provider_tenure_days        INT64,
+
+  --------------------------------------------------------
+  -- 5. Current Program / subscription
+  --------------------------------------------------------
+  program_id                  STRING,            -- ref to program table
+  cycle_length_months         INT64,             -- 3 / 6 / 9
+  cycle_start_date            DATE,
+  cycle_end_date              DATE,
+  cycle_start_month           DATE,
+  cycle_end_month             DATE,
+  grace_period_days           INT64,             -- allowed days to renew after cycle_end_date
+  days_in_cycle               INT64,            -- cycle_end_date - cycle_start_date
+  cycle_number_for_provider   INT64,            -- 1st, 2nd, 3rd, ... cycle for this provider
+
+  days_since_cycle_start      INT64,            -- snapshot_date - cycle_start_date
+  days_to_cycle_end           INT64,            -- cycle_end_date - snapshot_date
+  is_in_grace_period          BOOL,             -- snapshot_date between cycle_end_date and cycle_end_date+grace
+  current_subscription_status STRING,           -- 'ACTIVE', 'PAUSED', 'EXPIRED', 'CANCELLED', etc.
+  days_since_freeze           INT64,
+
+  --------------------------------------------------------
+  -- 6. Previous Program / subscription
+  --------------------------------------------------------
+  prior_churn_events_count    INT64,             -- how many times this provider churned historically (before current cycle)
+  has_prior_churn             BOOL,              -- convenience flag (prior_churn_events_count > 0)
+  has_previous_cycle          BOOL,             -- provider had at least one cycle before this one
+
+  previous_cycle_length_months INT64,
+  previous_cycle_profit_total NUMERIC,          -- total profit in previous cycle
+  previous_cycle_churned      BOOL,             -- previous cycle ended with churn/long gap or natural renewal
+
+  --------------------------------------------------------
+  -- 7. Payments & revenue: lifetime aggregates
+  --------------------------------------------------------
+  lifetime_orders_count       INT64,            -- all orders across all time for this provider
+  lifetime_payments_count     INT64,            -- all payment events
+  lifetime_revenue_total      NUMERIC,          -- sum(total_amount)
+  lifetime_profit_total       NUMERIC,          -- sum(profit_amount)
+  lifetime_refund_amount      NUMERIC,          -- sum(total_amount) for refund rows
+  lifetime_refund_count       INT64,
+  lifetime_profit_margin_pct  FLOAT64,          -- lifetime_profit_total / NULLIF(lifetime_revenue_total, 0)
+  lifetime_avg_order_value    NUMERIC,          -- lifetime_revenue_total / NULLIF(lifetime_orders_count, 0)
+
+  lifetime_copay_share_pct    FLOAT64,          -- sum(copay_amount) / sum(total_amount)
+  lifetime_insurance_share_pct FLOAT64,         -- sum(insurance_amount) / sum(total_amount)
+
+  --------------------------------------------------------
+  -- 8. Payments & revenue: current cycle aggregates
+  --------------------------------------------------------
+  cycle_orders_count          INT64,            -- number of orders in current cycle
+  cycle_payments_count        INT64,            -- number of payment events in current cycle
+  cycle_revenue_total         NUMERIC,          -- sum(total_amount) in current cycle
+  cycle_profit_total          NUMERIC,          -- sum(profit_amount) in current cycle
+  cycle_profit_margin_pct     FLOAT64,          -- cycle_profit_total / NULLIF(cycle_revenue_total, 0)
+
+  cycle_copay_total           NUMERIC,          -- sum(copay_amount)
+  cycle_insurance_total       NUMERIC,          -- sum(insurance_amount)
+  cycle_copay_share_pct       FLOAT64,          -- cycle_copay_total / NULLIF(cycle_revenue_total, 0)
+  cycle_insurance_share_pct   FLOAT64,          -- cycle_insurance_total / NULLIF(cycle_revenue_total, 0)
+
+  cycle_refund_amount         NUMERIC,          -- refunds in current cycle
+  cycle_refund_count          INT64,
+
+  cycle_avg_order_value       NUMERIC,          -- cycle_revenue_total / NULLIF(cycle_orders_count, 0)
+  cycle_avg_profit_per_order  NUMERIC,          -- cycle_profit_total / NULLIF(cycle_orders_count, 0)
+
+  days_since_last_order       INT64,            -- snapshot_date - last_order_date
+  last_order_date             DATE,
+
+  avg_days_between_orders_lifetime INT64,       -- average gap between orders (lifetime)
+  avg_days_between_orders_180d     INT64,       -- average gap over last 180 days
+  stddev_days_between_orders_180d  FLOAT64,     -- variability in ordering pattern (volatility)
+  has_gap_over_60d_without_orders  BOOL,        -- any 60+ day gap in last 6–12 months
+
+  --------------------------------------------------------
+  -- 9. Payments & revenue: recent windows (recency & trend)
+  --    All windows are relative to snapshot_date and only include data BEFORE it.
+  --------------------------------------------------------
+  payments_30d_count          INT64,
+  payments_60d_count          INT64,
+  payments_90d_count          INT64,
+
+  revenue_30d_total           NUMERIC,
+  revenue_60d_total           NUMERIC,
+  revenue_90d_total           NUMERIC,
+
+  profit_30d_total            NUMERIC,
+  profit_60d_total            NUMERIC,
+  profit_90d_total            NUMERIC,
+
+  refunds_90d_count           INT64,
+  refunds_90d_amount          NUMERIC,
+
+  revenue_trend_3m_vs_prev3m  FLOAT64,          -- (revenue_last_3m - revenue_prev_3m) / NULLIF(revenue_prev_3m, 0)
+  orders_trend_3m_vs_prev3m   FLOAT64,
+
+  --------------------------------------------------------
+  -- 10. Engagement – CRM (Creatio) interactions
+  --------------------------------------------------------
+  crm_last_contact_date       DATE,
+  days_since_last_crm_contact INT64,            -- snapshot_date - crm_last_contact_date
+
+  crm_interactions_30d_count  INT64,            -- any CRM activity: calls, meetings, emails, tasks
+  crm_interactions_90d_count  INT64,
+  crm_interactions_180d_count INT64,
+
+  crm_meetings_90d_count      INT64,
+  crm_emails_90d_count        INT64,
+  crm_calls_logged_90d_count  INT64,
+
+  crm_open_tasks_count        INT64,            -- open tasks at snapshot_date
+  crm_overdue_tasks_count     INT64,            -- overdue tasks for this provider
+
+  has_recent_successful_meeting BOOL,           -- TRUE if there was a meeting in last N days
+  has_recent_failed_renewal_conversation BOOL,  -- derived from CRM tags (if available)
+
+  --------------------------------------------------------
+  -- 11. Engagement – Call center signals
+  --------------------------------------------------------
+  cc_last_call_date           DATE,
+  days_since_last_call        INT64,
+
+  cc_calls_inbound_30d_count  INT64,
+  cc_calls_inbound_90d_count  INT64,
+  cc_calls_outbound_30d_count INT64,
+  cc_calls_outbound_90d_count INT64,
+
+  cc_avg_call_duration_90d_sec FLOAT64,
+  cc_total_call_duration_90d_sec INT64,
+
+  cc_calls_with_issue_tag_90d_count INT64,      -- calls tagged as issue/complaint
+  cc_calls_retention_script_90d_count INT64,    -- calls where renewal/retention script was used
+  cc_calls_successful_renewal_90d_count INT64,  -- calls leading to renewal/upsell
+
+  --------------------------------------------------------
+  -- 12. Mix & penetration of programs
+  --------------------------------------------------------
+  total_cycles_for_provider   INT64,            -- how many cycles total this provider had
+  distinct_programs_count     INT64,            -- number of distinct programs used by this provider
+  is_single_program_provider  BOOL,             -- provider only ever used one program
+)
+PARTITION BY snapshot_date
+CLUSTER BY provider_id, cycle_end_date ;
+```
+
+
+## 7. Looker Dashboards - sketchily
 
  **[LookML directory](https://github.com/Cerega313/-Allia-Health-Group/tree/main/LookML)**
 
