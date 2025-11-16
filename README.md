@@ -124,7 +124,6 @@ flowchart LR
 
 ### 2.2 Files structure
 The file structure is described in **[dbt/models/staging/_src__aliia_health.yml](https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml)**.
-[Uploading lifefile_providers_raw_2025_10_11.csv…]()
 
 
 ### 2.3 Cloud Function #1 — cf_lifefile_sftp_to_gcs
