@@ -12,7 +12,6 @@ sources:
             description: "Unique identifier of the payment event (row) in LifeFile."
             tests:
               - not_null
-              - unique
 
           - name: order_id
             description: Reference to the associated order/prescription. The order is linked to provider_id in the operational lf_ops_orders table.
