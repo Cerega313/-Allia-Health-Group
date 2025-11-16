@@ -1,0 +1,6 @@
+order_type_id,order_type,program_name,cycle_length_months,program_category,grace_period_days,is_auto_renew,is_active,created_at,updated_at
+1,GROWTH_3M,Growth 3-Month Program,3,Growth,14,false,true,2024-01-10T09:00:00,2025-01-05T12:30:00
+2,GROWTH_6M,Growth 6-Month Program,6,Growth,21,false,true,2024-03-01T10:15:00,2025-02-01T08:00:00
+3,GROWTH_9M,Growth 9-Month Program,9,Growth,30,false,true,2024-05-20T11:45:00,2025-02-15T09:20:00
+4,GROWTH_3M_AUTO,Growth 3-Month Auto-Renew (Legacy),3,Legacy,14,true,false,2023-06-01T09:00:00,2024-12-31T23:59:59
+5,GROWTH_6M_AUTO,Growth 6-Month Auto-Renew (Legacy),6,Legacy,21,true,false,2023-07-15T10:30:00,2024-12-31T23:59:59
