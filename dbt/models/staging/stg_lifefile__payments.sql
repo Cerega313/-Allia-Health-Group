@@ -6,6 +6,7 @@ with raw as (
 ),
 
 clean as (
+
   select
         -- keys
         payment_id,
@@ -30,11 +31,12 @@ clean as (
         payment_method,
         status,
   
-        (case when is_refund is null then false
-              when lower(cast(is_refund as string)) in ('true','t','1','yes','y')  then true
-              when lower(cast(is_refund as string)) in ('false','f','0','no','n') then false
-              else SAFE_CAST(is_refund as bool)
-              end) as is_refund,
+        case 
+          when is_refund is null then false
+          when lower(cast(is_refund as string)) in ('true','t','1','yes','y')  then true
+          when lower(cast(is_refund as string)) in ('false','f','0','no','n') then false
+          else SAFE_CAST(is_refund as bool)
+        end as is_refund,
 
         -- technical field
         gcs_uri
@@ -42,5 +44,12 @@ clean as (
     from raw
 )
 
-select *
-from clean;
+select
+  *
+from clean
+qualify
+  row_number() over (
+    partition by payment_id, updated_at
+    order by updated_at desc, created_at desc
+  ) = 1
+;
