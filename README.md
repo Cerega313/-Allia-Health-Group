@@ -269,6 +269,11 @@ flowchart LR
   subgraph MARTS["dbt marts & ai"]
     FACT_PAY["fact_payment_events"]
     FACT_PROV_SUB["fact_provider_subscription_history"]
+
+    FACT_PROV_CHURN_M["fact_provider_churn_monthly\n(churn & revenue by month/cycle/state)"]
+    FACT_PROV_RISK["fact_provider_risk_snapshot\n(provider-level churn risk snapshot)"]
+    FACT_PROV_DAILY["fact_provider_daily_metrics\n(daily engagement & activity)"]
+
     DIM_PROV["dim_provider"]
     DIM_PROGRAM["dim_program_cycle"]
     AI_CHURN["ai_churn.provider_cycle_training"]
@@ -318,7 +323,7 @@ flowchart LR
   SAT_PAY_FIN_RAW --> SAT_PAY_FIN_SCD
   SAT_PROV_SUB_RAW --> SAT_PROV_SUB_SCD
 
-  %% ---------- Business Vault → Marts ----------
+  %% ---------- Business Vault → Base marts ----------
   %% Payment facts
   HUB_PAY --> FACT_PAY
   HUB_ORDER --> FACT_PAY
@@ -342,11 +347,30 @@ flowchart LR
   LINK_PROV_ORDER --> FACT_PROV_SUB
   SAT_PROV_SUB_SCD --> FACT_PROV_SUB
 
-  %% AI churn dataset from marts / dims
-  FACT_PAY --> AI_CHURN
-  FACT_PROV_SUB --> AI_CHURN
+  %% ---------- Derived marts for dashboards ----------
+  %% Monthly churn & revenue mart (feeds Overview dashboard)
+  FACT_PROV_SUB --> FACT_PROV_CHURN_M
+  FACT_PAY --> FACT_PROV_CHURN_M
+  DIM_PROV --> FACT_PROV_CHURN_M
+  DIM_PROGRAM --> FACT_PROV_CHURN_M
+
+  %% Risk snapshot mart (feeds Risks dashboard)
+  FACT_PROV_SUB --> FACT_PROV_RISK
+  FACT_PAY --> FACT_PROV_RISK
+  DIM_PROV --> FACT_PROV_RISK
+  DIM_PROGRAM --> FACT_PROV_RISK
+
+  %% Daily metrics mart (for daily monitoring & AI features)
+  FACT_PAY --> FACT_PROV_DAILY
+  DIM_PROV --> FACT_PROV_DAILY
+
+  %% ---------- AI churn dataset from marts / dims ----------
+  FACT_PROV_CHURN_M --> AI_CHURN
+  FACT_PROV_RISK --> AI_CHURN
+  FACT_PROV_DAILY --> AI_CHURN
   DIM_PROV --> AI_CHURN
   DIM_PROGRAM --> AI_CHURN
+
 ```
 
 ## 6. ai_churn.provider_cycle_train
