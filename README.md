@@ -125,7 +125,7 @@ flowchart LR
 ### 2.2 Links
 **[source descriptions](https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml)** 
 
-**[cloud functions](https://github.com/Cerega313/-Allia-Health-Group/blob/main/dbt/models/staging/_src__aliia_health.yml](https://github.com/Cerega313/-Allia-Health-Group/tree/main/%D1%81loud_function))**
+**[cloud functions](https://github.com/Cerega313/-Allia-Health-Group/tree/main/%D1%81loud_function)**
 
 
 ### 2.3 Cloud Function #1 — cf_lifefile_sftp_to_gcs
@@ -215,6 +215,8 @@ The full implementation lives under /dbt
 Below is a conceptual overview aligned with the architecture diagram.
 
 ## dbt model lineage (CRM & LifeFile → Raw Vault → Business Vault → Marts → ai_churn)
+
+**[dbt models](https://github.com/Cerega313/-Allia-Health-Group/tree/main/dbt/models)** 
 
 ```mermaid
 flowchart LR
