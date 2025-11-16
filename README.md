@@ -24,7 +24,7 @@ flowchart LR
 
   %% --- Orchestration (Cloud Scheduler) ---
   subgraph GCP_Scheduler["Orchestration"]
-    CS["Cloud Scheduler<br/>(HTTP trigger 23:45 daily)"]
+    CS["Cloud Scheduler<br/>(HTTP trigger)"]
   end
 
   %% --- GCP: Ingestion layer ---
