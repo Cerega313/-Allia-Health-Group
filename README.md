@@ -234,7 +234,7 @@ flowchart LR
     STG_CRM_ORDT["stg_crm__order_types"]
     STG_LF_PAY["stg_lifefile__payments"]
     STG_LF_PROV["stg_lifefile__providers"]
-    STG_PROV_CONF["int_provider_conformed\n(join CRM + LifeFile by NPI)"]
+    STG_PROV_CONF["int_provider_conformed"]
   end
 
   %% ---------- Raw Vault ----------
