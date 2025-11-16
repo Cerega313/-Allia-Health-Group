@@ -513,9 +513,7 @@ CREATE TABLE IF NOT EXISTS ai_churn.provider_cycle_train (
   total_cycles_for_provider   INT64,            -- how many cycles total this provider had
   distinct_programs_count     INT64,            -- number of distinct programs used by this provider
   is_single_program_provider  BOOL,             -- provider only ever used one program
-)
-PARTITION BY snapshot_date
-CLUSTER BY provider_id, cycle_end_date ;
+) ;
 ```
 
 
