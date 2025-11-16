@@ -1,5 +1,5 @@
 dashboard: provider_churn_risks {
-  title: "Provider Churn - Risks"
+  title: "Provider Churn – Risks"
   layout: tile
 
   # -------- Filters ----------
@@ -20,7 +20,7 @@ dashboard: provider_churn_risks {
   # -------- KPI tiles ----------
 
   element: kpi_grace_period {
-    title: "Grace period"
+    title: "In grace period"
     type: single_value
     query: {
       explore: provider_churn
@@ -45,10 +45,10 @@ dashboard: provider_churn_risks {
     }
   }
 
-  # -------- Churn probability bands ----------
+  # -------- Chart: Churn probability bands ----------
 
   element: chart_churn_probability_bands {
-    title: "Churn probability"
+    title: "Churn probability bands"
     type: looker_bar
     query: {
       explore: provider_churn
@@ -64,10 +64,10 @@ dashboard: provider_churn_risks {
     }
   }
 
-  # -------- Lost profit for high risk by cycle ----------
+  # -------- Chart: Potential lost profit for high-risk by cycle ----------
 
   element: chart_high_risk_lost_profit_by_cycle {
-    title: "Potential lost profit for high-risk group"
+    title: "Potential lost profit (high-risk providers)"
     type: looker_column
     query: {
       explore: provider_churn
@@ -83,10 +83,10 @@ dashboard: provider_churn_risks {
     }
   }
 
-  # -------- Table of churned & potential churned ----------
+  # -------- Table: churned and at-risk providers ----------
 
   element: table_churned_and_at_risk {
-    title: "List of churned and potential churned"
+    title: "Churned and at-risk providers"
     type: table
     query: {
       explore: provider_churn
@@ -111,4 +111,5 @@ dashboard: provider_churn_risks {
       state: fact_provider_subscription_history.state
     }
   }
+
 }
