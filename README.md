@@ -208,9 +208,6 @@ For the provider churn use case in the SFTP → GCS → Cloud Functions → DWH 
 
 Therefore, for LifeFile + CRM analytics, BI dashboards and the churn training dataset, BigQuery is the natural choice for the main DWH, while Postgres can still be used (if needed) for transactional systems and operational microservices.
 
-
-
-
 ## 5. Downstream modeling (dbt) — overview
 
 The full implementation lives under /dbt
@@ -348,3 +345,11 @@ flowchart LR
   DIM_PROV --> AI_CHURN
   DIM_PROGRAM --> AI_CHURN
 ```
+
+## 5. Looker Dashboards - sketchily
+
+<img width="3020" height="1634" alt="image" src="https://github.com/user-attachments/assets/b5c70be4-3f57-4ac0-8206-dd2dffef18cf" />
+
+<img width="3168" height="1634" alt="image" src="https://github.com/user-attachments/assets/0a20d8c1-6a96-4ed9-a942-2c5615fdafe7" />
+
+
